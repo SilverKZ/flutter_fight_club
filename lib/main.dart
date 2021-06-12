@@ -41,6 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int yourLives = maxLives;
   int enemyLives = maxLives;
 
+  String message = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: double.infinity,
                     child: Center(
                       child: Text(
-                        "",//_getTextFightersInfo(),
+                        message,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: FightClubColors.darkGreyText,
@@ -129,10 +131,15 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         yourLives = maxLives;
         enemyLives = maxLives;
+        message = "";
       });
     }
     if (defendingBodyPart != null && attackingBodyPart != null) {
       setState(() {
+
+        whatEnemyDefends = BodyPart.random();
+        whatEnemyAttacks = BodyPart.random();
+
         final bool enemyLoseLife = attackingBodyPart != whatEnemyDefends;
         final bool youLoseLife = defendingBodyPart != whatEnemyAttacks;
         if (enemyLoseLife) {
@@ -142,38 +149,35 @@ class _MyHomePageState extends State<MyHomePage> {
           yourLives--;
         }
 
-        whatEnemyDefends = BodyPart.random();
-        whatEnemyAttacks = BodyPart.random();
+        //---------------------------
+
+        if (yourLives == 0 && enemyLives == 0) {
+          message = "Draw";
+        } else if (yourLives > 0 && enemyLives == 0) {
+          message = "You won";
+        } else if (yourLives == 0 && enemyLives > 0) {
+          message = "You lost";
+        } else {
+          if (attackingBodyPart == whatEnemyDefends) {
+            message = "Your attack was blocked.\n";
+          } else {
+            message =
+            "You hit enemy’s ${attackingBodyPart.toString().toLowerCase()}.\n";
+          }
+          if (defendingBodyPart == whatEnemyAttacks) {
+            message += "Enemy’s attack was blocked.";
+          } else {
+            message +=
+            "Enemy hit your ${whatEnemyAttacks.toString().toLowerCase()}.";
+          }
+        }
+
+        //---------------------------
 
         defendingBodyPart = null;
         attackingBodyPart = null;
       });
     }
-  }
-
-  String _getTextFightersInfo() {
-    String text = "";
-    setState(() {
-      if (yourLives == 0 && enemyLives == 0) {
-        text = "Draw";
-      } else if (yourLives > 0 && enemyLives == 0) {
-        text = "You won";
-      } else if (yourLives == 0 && enemyLives > 0) {
-        text = "You lost";
-      } else {
-        if (attackingBodyPart == whatEnemyDefends) {
-          text = "Your attack was blocked.\n";
-        } else {
-          text = "You hit enemy’s ${whatEnemyDefends.toString().toLowerCase()}.\n";
-        }
-        if (defendingBodyPart == whatEnemyAttacks) {
-          text += "Enemy’s attack was blocked.";
-        } else {
-          text += "Enemy hit your ${whatEnemyAttacks.toString().toLowerCase()}.";
-        }
-      }
-  });
-    return text;
   }
 }
 
@@ -460,9 +464,10 @@ class LivesWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: List.generate(overllLivesCount, (index) {
+        final double paddingIcon = index == overllLivesCount - 1 ? 0 : 4;
         if (index < currentLivesCount) {
           return Padding(
-            padding: const EdgeInsets.only(bottom: 4),
+            padding: EdgeInsets.only(bottom: paddingIcon),
             child: Image.asset(
               FightClubIcons.heartFull,
               width: 18,
@@ -471,7 +476,7 @@ class LivesWidget extends StatelessWidget {
           );
         } else {
           return Padding(
-            padding: const EdgeInsets.only(bottom: 4),
+            padding: EdgeInsets.only(bottom: paddingIcon),
             child: Image.asset(
               FightClubIcons.heartEmpty,
               width: 18,
