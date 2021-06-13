@@ -453,6 +453,7 @@ class LivesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: List.generate(overallLivesCount, (index) {
         final double paddingIcon = index == overallLivesCount - 1 ? 0 : 4;
         if (index < currentLivesCount) {
