@@ -35,11 +35,8 @@ class MyHomePageState extends State<MyHomePage> {
   BodyPart? defendingBodyPart;
   BodyPart? attackingBodyPart;
 
-  // BodyPart whatEnemyAttacks = BodyPart.random();
-  // BodyPart whatEnemyDefends = BodyPart.random();
-
-  BodyPart? whatEnemyAttacks;
-  BodyPart? whatEnemyDefends;
+  BodyPart whatEnemyAttacks = BodyPart.random();
+  BodyPart whatEnemyDefends = BodyPart.random();
 
   int yourLives = maxLives;
   int enemysLives = maxLives;
@@ -140,8 +137,8 @@ class MyHomePageState extends State<MyHomePage> {
     if (defendingBodyPart != null && attackingBodyPart != null) {
       setState(() {
 
-        whatEnemyDefends = BodyPart.random();
-        whatEnemyAttacks = BodyPart.random();
+        // whatEnemyDefends = BodyPart.random();
+        // whatEnemyAttacks = BodyPart.random();
 
         final bool enemyLoseLife = attackingBodyPart != whatEnemyDefends;
         final bool youLoseLife = defendingBodyPart != whatEnemyAttacks;
@@ -176,6 +173,9 @@ class MyHomePageState extends State<MyHomePage> {
         }
 
         //---------------------------
+
+        whatEnemyDefends = BodyPart.random();
+        whatEnemyAttacks = BodyPart.random();
 
         defendingBodyPart = null;
         attackingBodyPart = null;
