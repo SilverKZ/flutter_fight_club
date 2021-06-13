@@ -294,14 +294,9 @@ class FightersInfo extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 27,
-              ),
-              child: LivesWidget(
-                overallLivesCount: maxLivesCount,
-                currentLivesCount: yourLivesCount,
-              ),
+            LivesWidget(
+              overallLivesCount: maxLivesCount,
+              currentLivesCount: yourLivesCount,
             ),
             Column(
               children: [
@@ -344,14 +339,9 @@ class FightersInfo extends StatelessWidget {
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 27,
-              ),
-              child: LivesWidget(
-                overallLivesCount: maxLivesCount,
-                currentLivesCount: enemysLivesCount,
-              ),
+            LivesWidget(
+              overallLivesCount: maxLivesCount,
+              currentLivesCount: enemysLivesCount,
             ),
           ],
         ),
