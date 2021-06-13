@@ -162,10 +162,10 @@ class MyHomePageState extends State<MyHomePage> {
             message = "Your attack was blocked.\n";
           } else {
             message =
-            "You hit enemy’s ${attackingBodyPart.toString().toLowerCase()}.\n";
+            "You hit enemy's ${attackingBodyPart.toString().toLowerCase()}.\n";
           }
           if (defendingBodyPart == whatEnemyAttacks) {
-            message += "Enemy’s attack was blocked.";
+            message += "Enemy's attack was blocked.";
           } else {
             message +=
             "Enemy hit your ${whatEnemyAttacks.toString().toLowerCase()}.";
