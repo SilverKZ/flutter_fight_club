@@ -39,7 +39,7 @@ class MyHomePageState extends State<MyHomePage> {
   BodyPart whatEnemyDefends = BodyPart.random();
 
   int yourLives = maxLives;
-  int enemyLives = maxLives;
+  int enemysLives = maxLives;
 
   String message = "";
 
@@ -53,7 +53,7 @@ class MyHomePageState extends State<MyHomePage> {
             FightersInfo(
               maxLivesCount: maxLives,
               yourLivesCount: yourLives,
-              enemysLivesCount: enemyLives,
+              enemysLivesCount: enemysLives,
             ),
             Expanded(
               child: Padding(
@@ -89,7 +89,7 @@ class MyHomePageState extends State<MyHomePage> {
             GoButton(
               onTap: _onGoButtonClicked,
               color: _getGoButtonColor(),
-              text: yourLives == 0 || enemyLives == 0 ? "Start new game" : "Go",
+              text: yourLives == 0 || enemysLives == 0 ? "Start new game" : "Go",
             ),
             SizedBox(height: 16),
           ],
@@ -99,7 +99,7 @@ class MyHomePageState extends State<MyHomePage> {
   }
 
   void _selectDefendingBodyPart(final BodyPart value) {
-    if (yourLives == 0 || enemyLives == 0) {
+    if (yourLives == 0 || enemysLives == 0) {
       return;
     }
     setState(() {
@@ -108,7 +108,7 @@ class MyHomePageState extends State<MyHomePage> {
   }
 
   void _selectAttackingBodyPart(final BodyPart value) {
-    if (yourLives == 0 || enemyLives == 0) {
+    if (yourLives == 0 || enemysLives == 0) {
       return;
     }
     setState(() {
@@ -117,7 +117,7 @@ class MyHomePageState extends State<MyHomePage> {
   }
 
   Color _getGoButtonColor() {
-    if (yourLives == 0 || enemyLives == 0) {
+    if (yourLives == 0 || enemysLives == 0) {
       return FightClubColors.blackButton;
     } else if (defendingBodyPart == null || attackingBodyPart == null) {
       return FightClubColors.greyButton;
@@ -127,10 +127,10 @@ class MyHomePageState extends State<MyHomePage> {
   }
 
   void _onGoButtonClicked() {
-    if (yourLives == 0 || enemyLives == 0) {
+    if (yourLives == 0 || enemysLives == 0) {
       setState(() {
         yourLives = maxLives;
-        enemyLives = maxLives;
+        enemysLives = maxLives;
         message = "";
       });
     }
@@ -143,7 +143,7 @@ class MyHomePageState extends State<MyHomePage> {
         final bool enemyLoseLife = attackingBodyPart != whatEnemyDefends;
         final bool youLoseLife = defendingBodyPart != whatEnemyAttacks;
         if (enemyLoseLife) {
-          enemyLives--;
+          enemysLives--;
         }
         if (youLoseLife) {
           yourLives--;
@@ -151,11 +151,11 @@ class MyHomePageState extends State<MyHomePage> {
 
         //---------------------------
 
-        if (yourLives == 0 && enemyLives == 0) {
+        if (yourLives == 0 && enemysLives == 0) {
           message = "Draw";
-        } else if (yourLives > 0 && enemyLives == 0) {
+        } else if (yourLives > 0 && enemysLives == 0) {
           message = "You won";
-        } else if (yourLives == 0 && enemyLives > 0) {
+        } else if (yourLives == 0 && enemysLives > 0) {
           message = "You lost";
         } else {
           if (attackingBodyPart == whatEnemyDefends) {
@@ -299,7 +299,7 @@ class FightersInfo extends StatelessWidget {
                 top: 27,
               ),
               child: LivesWidget(
-                overllLivesCount: maxLivesCount,
+                overallLivesCount: maxLivesCount,
                 currentLivesCount: yourLivesCount,
               ),
             ),
@@ -349,7 +349,7 @@ class FightersInfo extends StatelessWidget {
                 top: 27,
               ),
               child: LivesWidget(
-                overllLivesCount: maxLivesCount,
+                overallLivesCount: maxLivesCount,
                 currentLivesCount: enemysLivesCount,
               ),
             ),
@@ -448,23 +448,23 @@ class ControlsWidget extends StatelessWidget {
 }
 
 class LivesWidget extends StatelessWidget {
-  final int overllLivesCount;
+  final int overallLivesCount;
   final int currentLivesCount;
 
   const LivesWidget({
     Key? key,
-    required this.overllLivesCount,
+    required this.overallLivesCount,
     required this.currentLivesCount,
-  })  : assert(overllLivesCount >= 1),
+  })  : assert(overallLivesCount >= 1),
         assert(currentLivesCount >= 0),
-        assert(currentLivesCount <= overllLivesCount),
+        assert(currentLivesCount <= overallLivesCount),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: List.generate(overllLivesCount, (index) {
-        final double paddingIcon = index == overllLivesCount - 1 ? 0 : 4;
+      children: List.generate(overallLivesCount, (index) {
+        final double paddingIcon = index == overallLivesCount - 1 ? 0 : 4;
         if (index < currentLivesCount) {
           return Padding(
             padding: EdgeInsets.only(bottom: paddingIcon),
