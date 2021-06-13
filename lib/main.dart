@@ -35,8 +35,11 @@ class MyHomePageState extends State<MyHomePage> {
   BodyPart? defendingBodyPart;
   BodyPart? attackingBodyPart;
 
-  BodyPart whatEnemyAttacks = BodyPart.random();
-  BodyPart whatEnemyDefends = BodyPart.random();
+  // BodyPart whatEnemyAttacks = BodyPart.random();
+  // BodyPart whatEnemyDefends = BodyPart.random();
+
+  BodyPart? whatEnemyAttacks;
+  BodyPart? whatEnemyDefends;
 
   int yourLives = maxLives;
   int enemysLives = maxLives;
