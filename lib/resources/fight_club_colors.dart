@@ -13,5 +13,7 @@ class FightClubColors {
   static const backgroundPanel = const Color(0xFFC5D1EA);
   static const backgroundYourInfo = const Color(0xFFFFFFFF);
   static const darkPurple = const Color(0xFFC5D1EA);
-
+  static const wonButton = const Color(0xFF038800);
+  static const lostButton = const Color(0xFFEA2C2C);
+  static const drawButton = const Color(0xFF1C79CE);
 }

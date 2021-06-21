@@ -6,6 +6,7 @@ import 'package:flutter_fight_club/widgets/fight_result_widget.dart';
 import 'package:flutter_fight_club/widgets/secondary_action_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../fight_result.dart';
 import 'statistics_page.dart';
 
 class MainPage extends StatelessWidget {
@@ -42,21 +43,32 @@ class _MainPageContent extends StatelessWidget {
               ),
             ),
             Expanded(child: SizedBox()),
-            FutureBuilder<String?>(
-              future: SharedPreferences.getInstance().then(
-                (sharedPreferences) =>
-                    sharedPreferences.getString("last_fight_result"),
-              ),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData || snapshot.data == null) {
-                  return const SizedBox();
-                }
-                return Center(
-                  child: Text(snapshot.data!),
-                );
-              },
+            Column(
+              children: [
+                Text(
+                  "Last fight result",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: FightClubColors.darkGreyText,
+                  ),
+                ),
+                SizedBox(height: 12),
+                FutureBuilder<String?>(
+                  future: SharedPreferences.getInstance().then(
+                    (sharedPreferences) =>
+                        sharedPreferences.getString("last_fight_result"),
+                  ),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData || snapshot.data == null) {
+                      return const SizedBox();
+                    }
+                    return FightResultWidget(
+                      fightResult: FightResult.getResult(snapshot.data!),
+                    );
+                  },
+                ),
+              ],
             ),
-            FightResultWidget(),
             Expanded(child: SizedBox()),
             SecondaryActionButton(
               onTap: () {

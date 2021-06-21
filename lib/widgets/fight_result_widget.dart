@@ -5,17 +5,17 @@ import 'package:flutter_fight_club/resources/fight_club_images.dart';
 import '../fight_result.dart';
 
 class FightResultWidget extends StatelessWidget {
-  // final FightResult? fightResult;
+  final FightResult fightResult;
 
   const FightResultWidget({
     Key? key,
-    // required this.fightResult,
+    required this.fightResult,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 160,
+      height: 140,
       child: Stack(children: [
         Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -56,6 +56,7 @@ class FightResultWidget extends StatelessWidget {
                 Text(
                   "You",
                   style: TextStyle(
+                    fontSize: 14,
                     color: FightClubColors.darkGreyText,
                   ),
                 ),
@@ -67,22 +68,22 @@ class FightResultWidget extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              width: 44,
+            Container(
               height: 44,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: FightClubColors.blueButton,
-                ),
-                child: Center(
-                  child: Text(
-                    "vs",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                    ),
+              margin: EdgeInsets.only(top: 10),
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: _getResultBgColor(),
+                borderRadius: BorderRadius.circular(22),
+              ),
+              child: Center(
+                child: Text(
+                  fightResult.result.toLowerCase(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -93,6 +94,7 @@ class FightResultWidget extends StatelessWidget {
                 Text(
                   "Enemy",
                   style: TextStyle(
+                    fontSize: 14,
                     color: FightClubColors.darkGreyText,
                   ),
                 ),
@@ -108,5 +110,15 @@ class FightResultWidget extends StatelessWidget {
         ),
       ]),
     );
+  }
+
+  Color _getResultBgColor() {
+    if (fightResult.result == "Won") {
+      return FightClubColors.wonButton;
+    } else if (fightResult.result == "Lost") {
+      return FightClubColors.lostButton;
+    } else {
+      return FightClubColors.drawButton;
+    }
   }
 }
