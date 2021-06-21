@@ -12,6 +12,6 @@ class FightClubColors {
   static const whiteText = const Color(0xDEFFFFFF);
   static const backgroundPanel = const Color(0xFFC5D1EA);
   static const backgroundYourInfo = const Color(0xFFFFFFFF);
-  static const backgroundEnemyInfo = const Color(0xFFC5D1EA);
+  static const darkPurple = const Color(0xFFC5D1EA);
 
 }
