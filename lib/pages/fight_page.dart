@@ -143,7 +143,7 @@ class FightPageState extends State<FightPage> {
 
   void _updateStatistics() async {
     final FightResult? fightResult =
-    FightResult.calculateResult(yourLives, enemysLives);
+        FightResult.calculateResult(yourLives, enemysLives);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (fightResult != null) {
       prefs.setString("last_fight_result", fightResult.result);
