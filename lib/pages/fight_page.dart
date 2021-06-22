@@ -45,7 +45,7 @@ class FightPageState extends State<FightPage> {
             Expanded(
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 30, horizontal: 16),
+                const EdgeInsets.symmetric(vertical: 30, horizontal: 16),
                 child: ColoredBox(
                   color: FightClubColors.backgroundPanel,
                   child: SizedBox(
@@ -143,7 +143,7 @@ class FightPageState extends State<FightPage> {
 
   void _updateStatistics() async {
     final FightResult? fightResult =
-        FightResult.calculateResult(yourLives, enemysLives);
+    FightResult.calculateResult(yourLives, enemysLives);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (fightResult != null) {
       prefs.setString("last_fight_result", fightResult.result);
@@ -167,7 +167,7 @@ class FightPageState extends State<FightPage> {
         txt = "Your attack was blocked.\n";
       } else {
         txt =
-            "You hit enemy's ${attackingBodyPart.toString().toLowerCase()}.\n";
+        "You hit enemy's ${attackingBodyPart.toString().toLowerCase()}.\n";
       }
       if (defendingBodyPart == whatEnemyAttacks) {
         txt += "Enemy's attack was blocked.";
@@ -339,10 +339,10 @@ class ControlsWidget extends StatelessWidget {
 
   const ControlsWidget(
       {Key? key,
-      required this.defendingBodyPart,
-      required this.attackingBodyPart,
-      required this.selectDefendingBodyPart,
-      required this.selectAttackingBodyPart})
+        required this.defendingBodyPart,
+        required this.attackingBodyPart,
+        required this.selectDefendingBodyPart,
+        required this.selectAttackingBodyPart})
       : super(key: key);
 
   @override
@@ -505,7 +505,7 @@ class BodyPartButton extends StatelessWidget {
             border: Border.all(
               width: 2,
               color:
-                  selected ? Colors.transparent : FightClubColors.darkGreyText,
+              selected ? Colors.transparent : FightClubColors.darkGreyText,
             ),
             color: selected ? FightClubColors.blueButton : Colors.transparent,
           ),

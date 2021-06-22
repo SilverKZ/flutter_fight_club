@@ -55,7 +55,7 @@ class _MainPageContent extends StatelessWidget {
                 SizedBox(height: 12),
                 FutureBuilder<String?>(
                   future: SharedPreferences.getInstance().then(
-                    (sharedPreferences) =>
+                        (sharedPreferences) =>
                         sharedPreferences.getString("last_fight_result"),
                   ),
                   builder: (context, snapshot) {
@@ -99,3 +99,4 @@ class _MainPageContent extends StatelessWidget {
     );
   }
 }
+
