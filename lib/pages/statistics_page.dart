@@ -66,10 +66,10 @@ class StatisticsWidget extends StatelessWidget {
         (sharedPreferences) => sharedPreferences.getInt(sharedPreferencesKey),
       ),
       builder: (context, snapshot) {
-        int value =
-            (!snapshot.hasData || snapshot.data == null) ? 0 : snapshot.data!;
+        int? value =
+            (!snapshot.hasData || snapshot.data == null) ? 0 : snapshot.data;
         return Text(
-          "$title: ${value.toString()}",
+          "$title: ${(value ?? 0).toString()}",
           style: TextStyle(fontSize: 16, height: 2.4),
         );
       },
