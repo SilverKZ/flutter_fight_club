@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'pages/fight_page.dart';
 import 'pages/main_page.dart';
 
 void main() => runApp(MyApp());

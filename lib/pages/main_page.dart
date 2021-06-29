@@ -43,31 +43,31 @@ class _MainPageContent extends StatelessWidget {
               ),
             ),
             Expanded(child: SizedBox()),
-            Column(
-              children: [
-                Text(
-                  "Last fight result",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: FightClubColors.darkGreyText,
-                  ),
-                ),
-                SizedBox(height: 12),
-                FutureBuilder<String?>(
-                  future: SharedPreferences.getInstance().then(
-                        (sharedPreferences) =>
-                        sharedPreferences.getString("last_fight_result"),
-                  ),
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData || snapshot.data == null) {
-                      return const SizedBox();
-                    }
-                    return FightResultWidget(
+            FutureBuilder<String?>(
+              future: SharedPreferences.getInstance().then(
+                    (sharedPreferences) =>
+                    sharedPreferences.getString("last_fight_result"),
+              ),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData || snapshot.data == null) {
+                  return const SizedBox();
+                }
+                return Column(
+                  children: [
+                    Text(
+                      "Last fight result",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: FightClubColors.darkGreyText,
+                      ),
+                    ),
+                    SizedBox(height: 12),
+                    FightResultWidget(
                       fightResult: FightResult.getResult(snapshot.data!),
-                    );
-                  },
-                ),
-              ],
+                    ),
+                  ],
+                );
+              },
             ),
             Expanded(child: SizedBox()),
             SecondaryActionButton(
