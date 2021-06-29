@@ -11,7 +11,6 @@ class StatisticsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: FightClubColors.background,
       body: SafeArea(
-          // child: Text("111"),
         child: Column(
           children: [
             Container(
