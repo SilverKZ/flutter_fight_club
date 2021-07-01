@@ -78,31 +78,3 @@ class StatisticsPage extends StatelessWidget {
     );
   }
 }
-
-class StatisticsWidget extends StatelessWidget {
-  final String sharedPreferencesKey;
-  final String title;
-
-  const StatisticsWidget({
-    Key? key,
-    required this.sharedPreferencesKey,
-    required this.title,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<int?>(
-      future: SharedPreferences.getInstance().then(
-        (sharedPreferences) => sharedPreferences.getInt(sharedPreferencesKey),
-      ),
-      builder: (context, snapshot) {
-        int? value =
-            (!snapshot.hasData || snapshot.data == null) ? 0 : snapshot.data;
-        return Text(
-          "$title: ${(value ?? 0).toString()}",
-          style: TextStyle(fontSize: 16, height: 2.4),
-        );
-      },
-    );
-  }
-}
