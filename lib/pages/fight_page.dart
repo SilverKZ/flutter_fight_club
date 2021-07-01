@@ -113,21 +113,30 @@ class FightPageState extends State<FightPage> {
     }
   }
 
-  void _onGoButtonClicked() async {
+  void _onGoButtonClicked() {
     if (yourLives == 0 || enemysLives == 0) {
-      _updateStatistics();
       Navigator.of(context).pop();
-    }
-    if (defendingBodyPart != null && attackingBodyPart != null) {
+    } else if (defendingBodyPart != null && attackingBodyPart != null) {
       setState(() {
         final bool youLoseLife = defendingBodyPart != whatEnemyAttacks;
         final bool enemyLoseLife = attackingBodyPart != whatEnemyDefends;
 
         if (youLoseLife) {
-          yourLives--;
+          yourLives -= 1;
         }
         if (enemyLoseLife) {
-          enemysLives--;
+          enemysLives -= 1;
+        }
+
+        final FightResult? fightResult =
+        FightResult.calculateResult(yourLives, enemysLives);
+        if (fightResult != null) {
+          SharedPreferences.getInstance().then((sharedPreferences) {
+            sharedPreferences.setString("last_fight_result", fightResult.result);
+            final String key = "stats_${fightResult.result.toLowerCase()}";
+            final int currentValue = sharedPreferences.getInt(key) ?? 0;
+            sharedPreferences.setInt(key, currentValue + 1);
+          });
         }
 
         message = _calculateCenterText(youLoseLife, enemyLoseLife);
@@ -138,18 +147,6 @@ class FightPageState extends State<FightPage> {
         defendingBodyPart = null;
         attackingBodyPart = null;
       });
-    }
-  }
-
-  void _updateStatistics() async {
-    final FightResult? fightResult =
-    FightResult.calculateResult(yourLives, enemysLives);
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (fightResult != null) {
-      prefs.setString("last_fight_result", fightResult.result);
-      final String key = "stats_${fightResult.result.toLowerCase()}";
-      final int currentValue = prefs.getInt(key) ?? 0;
-      prefs.setInt(key, currentValue + 1);
     }
   }
 
