@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fight_club/resources/fight_club_colors.dart';
 import 'package:flutter_fight_club/resources/fight_club_images.dart';
@@ -48,11 +49,12 @@ class FightResultWidget extends StatelessWidget {
           ],
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            const SizedBox(width: 8),
             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 16),
                 Text(
                   "You",
                   style: TextStyle(
@@ -60,7 +62,7 @@ class FightResultWidget extends StatelessWidget {
                     color: FightClubColors.darkGreyText,
                   ),
                 ),
-                SizedBox(height: 12),
+                SizedBox(height: 10),
                 Image.asset(
                   FightClubImages.youAvatar,
                   width: 92,
@@ -89,8 +91,8 @@ class FightResultWidget extends StatelessWidget {
               ),
             ),
             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 16),
                 Text(
                   "Enemy",
                   style: TextStyle(
@@ -98,7 +100,7 @@ class FightResultWidget extends StatelessWidget {
                     color: FightClubColors.darkGreyText,
                   ),
                 ),
-                SizedBox(height: 12),
+                SizedBox(height: 10),
                 Image.asset(
                   FightClubImages.enemyAvatar,
                   width: 92,
@@ -106,6 +108,7 @@ class FightResultWidget extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(width: 8),
           ],
         ),
       ]),

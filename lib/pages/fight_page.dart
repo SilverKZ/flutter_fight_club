@@ -148,8 +148,8 @@ class FightPageState extends State<FightPage> {
     if (fightResult != null) {
       prefs.setString("last_fight_result", fightResult.result);
       final String key = "stats_${fightResult.result.toLowerCase()}";
-      int statValue = (prefs.getInt(key) ?? 0) + 1;
-      prefs.setInt(key, statValue);
+      final int currentValue = prefs.getInt(key) ?? 0;
+      prefs.setInt(key, currentValue + 1);
     }
   }
 

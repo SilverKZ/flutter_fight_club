@@ -23,16 +23,46 @@ class StatisticsPage extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  StatisticsWidget(sharedPreferencesKey: "stats_won", title: "Won"),
-                  StatisticsWidget(sharedPreferencesKey: "stats_draw", title: "Draw"),
-                  StatisticsWidget(sharedPreferencesKey: "stats_lost", title: "Lost"),
-                ],
-              ),
+            Expanded(child: const SizedBox.shrink()),
+            FutureBuilder<SharedPreferences>(
+              future: SharedPreferences.getInstance(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData || snapshot.data == null) {
+                  return const SizedBox();
+                }
+                final SharedPreferences sp = snapshot.data!;
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Won: ${sp.getInt("stats_won") ?? 0}",
+                      style: TextStyle(
+                        fontSize: 16,
+                        height: 2.4,
+                        color: FightClubColors.darkGreyText,
+                      ),
+                    ),
+                    Text(
+                      "Lost: ${sp.getInt("stats_lost") ?? 0}",
+                      style: TextStyle(
+                        fontSize: 16,
+                        height: 2.4,
+                        color: FightClubColors.darkGreyText,
+                      ),
+                    ),
+                    Text(
+                      "Draw: ${sp.getInt("stats_draw") ?? 0}",
+                      style: TextStyle(
+                        fontSize: 16,
+                        height: 2.4,
+                        color: FightClubColors.darkGreyText,
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
+            Expanded(child: const SizedBox.shrink()),
             Padding(
               padding: const EdgeInsets.only(bottom: 16),
               child: SecondaryActionButton(
